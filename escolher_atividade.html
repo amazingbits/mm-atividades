@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maria Moog</title>
+  <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/css/fonts.css">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+
+  <script defer src="./assets/js/font-awesome.js?ts=" + new Date().getTime()></script>
+  <script defer src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
+  <script defer src="./assets/js/scripts.js?ts=" + new Date().getTime()></script>
+</head>
+<body>
+  <!-- loader -->
+  <div class="loader">
+    <img src="./assets/img/loader.gif" alt="Uma animação de cérebro sorrindo">
+    <p>Carregando...</p>
+  </div>
+  <!-- /loader -->
+
+  <!-- área administrativa btn -->
+  <div class="top-left-btn">
+    <a href="#"><i class="fa fa-lock"></i> Área admistrativa</a>
+  </div>
+  <!-- /área administrativa btn -->
+
+  <!-- language selector -->
+  <div class="language-selector">
+    <i class="fa fa-globe"></i>
+    <div class="select-wrapper">
+      <select name="language" id="language">
+        <option value="pt">Português</option>
+        <option value="en">Inglês</option>
+      </select>
+      <span class="custom-arrow fa fa-sort-down"></span>
+    </div>
+  </div>
+  <!-- /language selector -->
+
+  <div class="container">
+
+    <div class="title">
+      <img src="./assets/img/icon.png" alt="Imagem do desenho de um cérebro humano com multiplas cores separadas por área do cérebro">
+      <p>Escolha a atividade</p>
+    </div>
+
+    <div class="activity-list">
+      <div class="activity-item" data-link="atividade_1">
+        <img src="./assets/img/stroop_icon.png" alt="Ícone com diversos círculos em cores diferentes">
+        <p>Stroop</p>
+      </div>
+
+      <div class="activity-item" data-link="atividade_2">
+        <img src="./assets/img/affective_classification_icon.png" alt="Ícone com uma prancheta e diversos itens numerados em cores diferentes">
+        <p>Class. afetiva</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

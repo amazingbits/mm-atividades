@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maria Moog</title>
+  <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/css/fonts.css">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+
+  <script defer src="./assets/js/font-awesome.js?ts=" + new Date().getTime()></script>
+  <script defer src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
+  <script defer src="./assets/js/scripts.js?ts=" + new Date().getTime()></script>
+</head>
+<body>
+  <!-- loader -->
+  <div class="loader">
+    <img src="./assets/img/loader.gif" alt="Uma animação de cérebro sorrindo">
+    <p>Carregando...</p>
+  </div>
+  <!-- /loader -->
+
+  <!-- área administrativa btn -->
+  <div class="top-left-btn">
+    <a href="#"><i class="fa fa-lock"></i> Área admistrativa</a>
+  </div>
+  <!-- /área administrativa btn -->
+
+  <div class="container">
+
+    <div class="title">
+      <img src="./assets/img/icon.png" alt="Imagem do desenho de um cérebro humano com multiplas cores separadas por área do cérebro">
+      <h1>Maria Moog</h1>
+      <p>Entre com os seus dados</p>
+    </div>
+
+    <form action="" id="addUser">
+      <div class="input-group">
+        <label for="username">Nome</label>
+        <input type="text" name="username" id="username" required>
+      </div>
+      <div class="input-group">
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email" required>
+      </div>
+      <div class="input-group">
+        <label for="language">Linguagem</label>
+        <select name="language" id="language">
+          <option value="pt">Português</option>
+          <option value="en">Inglês</option>
+        </select>
+      </div>
+      <input type="submit" class="btn btn-large" value="Login">
+    </form>
+  </div>
+</body>
+</html>
