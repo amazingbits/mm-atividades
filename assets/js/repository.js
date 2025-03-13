@@ -8,7 +8,7 @@ class IndexedDBRepository {
   async init(storeNames) {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(this.dbName, this.version);
-  
+
       request.onupgradeneeded = (event) => {
         this.db = event.target.result;
         storeNames.forEach(storeName => {
@@ -17,12 +17,12 @@ class IndexedDBRepository {
           }
         });
       };
-  
+
       request.onsuccess = (event) => {
         this.db = event.target.result;
         resolve(this.db);
       };
-  
+
       request.onerror = (event) => {
         reject(`Erro ao abrir o IndexedDB: ${event.target.errorCode}`);
       };
@@ -30,73 +30,88 @@ class IndexedDBRepository {
   }
 
   async add(storeName, data) {
-    return this._executeTransaction(storeName, 'readwrite', (store) => store.add(data));
-  }
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, "readwrite");
+      const store = transaction.objectStore(storeName);
+      const request = store.add(data);
 
-  async update(storeName, data) {
-    return this._executeTransaction(storeName, 'readwrite', (store) => store.put(data));
-  }
-
-  async delete(storeName, id) {
-    return this._executeTransaction(storeName, 'readwrite', (store) => store.delete(id));
-  }
-
-  async getAll(storeName) {
-    return this._executeTransaction(storeName, 'readonly', (store) => store.getAll());
-  }
-
-  async getById(storeName, id) {
-    return this._executeTransaction(storeName, 'readonly', (store) => store.get(id));
-  }
-
-  async search(storeName, criteria) {
-    return this._executeTransaction(storeName, "readonly", (store) => {
-      return new Promise((resolve, reject) => {
-        const results = [];
-        const request = store.openCursor();
-  
-        request.onsuccess = (event) => {
-          const cursor = event.target.result;
-          if (cursor) {
-            const match = Object.keys(criteria).every((key) => {
-              if (typeof cursor.value[key] === "string") {
-                return cursor.value[key].includes(criteria[key]);
-              }
-              return cursor.value[key] === criteria[key];
-            });
-  
-            if (match) {
-              results.push(cursor.value);
-            }
-  
-            cursor.continue();
-          } else {
-            resolve(results);
-          }
-        };
-  
-        request.onerror = (event) => {
-          console.error("Erro na busca:", event.target.error);
-          reject(`Erro na busca: ${event.target.error}`);
-        };
-      });
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(`Erro ao adicionar item: ${request.error}`);
     });
   }
 
-  _executeTransaction(storeName, mode, operation) {
+  async update(storeName, data) {
     return new Promise((resolve, reject) => {
-      const transaction = this.db.transaction(storeName, mode);
-      
+      const transaction = this.db.transaction(storeName, "readwrite");
       const store = transaction.objectStore(storeName);
-      const result = operation(store);
-  
-      if (result instanceof Promise) {
-        result.then(resolve).catch(reject);
-      } else {
-        resolve(result);
-      }
-  
-      transaction.onerror = (event) => reject(`Erro na transação: ${event.target.errorCode}`);
+      const request = store.put(data);
+
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(`Erro ao atualizar item: ${request.error}`);
+    });
+  }
+
+  async delete(storeName, id) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, "readwrite");
+      const store = transaction.objectStore(storeName);
+      const request = store.delete(id);
+
+      request.onsuccess = () => resolve();
+      request.onerror = () => reject(`Erro ao deletar item: ${request.error}`);
+    });
+  }
+
+  async getAll(storeName) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, "readonly");
+      const store = transaction.objectStore(storeName);
+      const request = store.getAll();
+
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(`Erro ao buscar todos os itens: ${request.error}`);
+    });
+  }
+
+  async getById(storeName, id) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, "readonly");
+      const store = transaction.objectStore(storeName);
+      const request = store.get(id);
+
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(`Erro ao buscar item: ${request.error}`);
+    });
+  }
+
+  async search(storeName, criteria) {
+    return new Promise((resolve, reject) => {
+      const transaction = this.db.transaction(storeName, "readonly");
+      const store = transaction.objectStore(storeName);
+      const request = store.openCursor();
+      const results = [];
+
+      request.onsuccess = (event) => {
+        const cursor = event.target.result;
+        if (cursor) {
+          const match = Object.keys(criteria).every((key) => {
+            if (typeof cursor.value[key] === "string") {
+              return cursor.value[key].includes(criteria[key]);
+            }
+            return cursor.value[key] === criteria[key];
+          });
+
+          if (match) {
+            results.push(cursor.value);
+          }
+
+          cursor.continue();
+        } else {
+          resolve(results);
+        }
+      };
+
+      request.onerror = () => reject(`Erro na busca: ${request.error}`);
     });
   }
 }

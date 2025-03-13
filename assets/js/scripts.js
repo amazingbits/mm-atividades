@@ -1,4 +1,8 @@
 const db = new IndexedDBRepository("db", 2);
+async function dbInit() {
+  await db.init(["user", "activity"]);
+}
+dbInit();
 
 const language = window.localStorage.getItem("language") ?? "pt";
 window.localStorage.setItem("language", language);
