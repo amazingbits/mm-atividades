@@ -28,11 +28,3 @@ function getFormattedDate() {
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
-
-const activityList = document.querySelectorAll(".activity-item");
-activityList.forEach((item) => {
-  item.addEventListener("click", (event) => {
-    const fileName = event.target.closest("div").dataset.link;
-    window.location.href = `/${fileName}.html`;
-  });
-});
