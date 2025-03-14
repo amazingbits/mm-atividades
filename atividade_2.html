@@ -294,138 +294,28 @@
       }
 
       async function showResults() {
-        const currentUser = await getCurrentUser();
-        if (!currentUser) return;
-
-        await db.init(["activity"]);
-        const allResults = await db.getAll("activity");
-
-        const filteredActivities = allResults.filter((result) => {
-          return (result.language === language);
-        });
-
-        const filteredResults = [];
-        filteredActivities.forEach(activity => {
-          activity.results.forEach(result => {
-            filteredResults.push(result);
-          });
-        });
-
-        const wordsList = data[language].map(item => item.word);
-
-        const wordStats = {};
-
-        wordsList.forEach(word => {
-          wordStats[word] = {
-            total: 0,
-            emotions: {
-              "nada emocional/neutra": 0,
-              "pouco emocional": 0,
-              "moderadamente emocional": 0,
-              "muito emocional": 0,
-              "completamente emocional": 0,
-            },
-          };
-        });
-
-        filteredResults.forEach(result => {
-          const { word, emotion } = result;
-
-          if (wordStats[word]) {
-            wordStats[word].total++;
-            wordStats[word].emotions[emotion]++;
-          }
-        });
-
-        const resultsContainer = document.createElement("div");
-        resultsContainer.classList.add("results-container");
-        resultsContainer.style.margin = "20px auto";
-        resultsContainer.style.width = "90%";
-        resultsContainer.style.maxHeight = "60vh";
-        resultsContainer.style.padding = "20px";
-        resultsContainer.style.backgroundColor = "#ffffff";
-        resultsContainer.style.borderRadius = "10px";
-        resultsContainer.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
-        resultsContainer.style.overflow = "auto";
-
-        const table = document.createElement("table");
-        table.style.width = "100%";
-        table.style.borderCollapse = "collapse";
-        table.style.marginBottom = "20px";
-        table.style.fontSize = "0.8rem";
-
-        const headerRow = document.createElement("tr");
-        headerRow.style.position = "sticky";
-        headerRow.style.top = "-20px";
-        headerRow.style.zIndex = "1";
-
-        const headers = ["Palavra", "Nada emocional/neutra", "Pouco emocional", "Moderadamente emocional", "Muito emocional", "Completamente emocional"];
-        headers.forEach(headerText => {
-          const header = document.createElement("th");
-          header.textContent = headerText;
-          header.style.padding = "10px";
-          header.style.border = "1px solid #cccccc";
-          header.style.backgroundColor = "#414141";
-          header.style.color = "#ffffff";
-          header.style.whiteSpace = "nowrap";
-          headerRow.appendChild(header);
-        });
-        table.appendChild(headerRow);
-
-        wordsList.forEach(word => {
-          const row = document.createElement("tr");
-          const wordCell = document.createElement("td");
-          wordCell.textContent = word;
-          wordCell.style.padding = "10px";
-          wordCell.style.border = "1px solid #cccccc";
-          wordCell.style.backgroundColor = "#f5f5f5";
-          wordCell.style.whiteSpace = "nowrap";
-          row.appendChild(wordCell);
-
-          const emotions = wordStats[word].emotions;
-          const total = wordStats[word].total;
-
-          Object.keys(emotions).forEach(emotion => {
-            const count = emotions[emotion];
-            const percentage = total > 0 ? ((count / total) * 100).toFixed(2) : "0.00";
-
-            const cell = document.createElement("td");
-            cell.textContent = `${count} (${percentage}%)`;
-            cell.style.padding = "10px";
-            cell.style.border = "1px solid #cccccc";
-            cell.style.backgroundColor = "#f5f5f5";
-            cell.style.whiteSpace = "nowrap";
-            row.appendChild(cell);
-          });
-
-          table.appendChild(row);
-        });
-
-        resultsContainer.appendChild(table);
-
-        const testContainer = document.querySelector(".affective-classification");
-        if (testContainer) {
-          testContainer.innerHTML = "";
-
-          testContainer.appendChild(resultsContainer);
-
-          const restartButton = document.createElement("button");
-          restartButton.innerText = "Tela Inicial";
-          restartButton.style.display = "block";
-          restartButton.style.margin = "20px auto";
-          restartButton.style.padding = "10px 15px";
-          restartButton.style.fontSize = "18px";
-          restartButton.style.border = "none";
-          restartButton.style.background = "#6FA3EF";
-          restartButton.style.color = "white";
-          restartButton.style.borderRadius = "5px";
-          restartButton.style.cursor = "pointer";
-          restartButton.onclick = () => {
-            window.location.href = "./index.html";
-          };
-
-          testContainer.appendChild(restartButton);
-        }
+        testContainer.innerHTML = `
+          <h2 style="font-size: 40px; margin-bottom: 10px; color: #414141;">FIM</h2>
+          <p style="font-size: 18px;"><strong>Nome:</strong> ${currentUser.username}</p>
+          <p style="font-size: 18px;"><strong>Email:</strong> ${currentUser.email}</p>
+        `;
+      
+        const restartButton = document.createElement("button");
+        restartButton.innerText = "Tela Inicial";
+        restartButton.style.display = "block";
+        restartButton.style.margin = "20px auto";
+        restartButton.style.padding = "10px 15px";
+        restartButton.style.fontSize = "18px";
+        restartButton.style.border = "none";
+        restartButton.style.background = "#6FA3EF";
+        restartButton.style.color = "white";
+        restartButton.style.borderRadius = "5px";
+        restartButton.style.cursor = "pointer";
+        restartButton.onclick = () => {
+          window.location.href = "./index.html";
+        };
+      
+        testContainer.appendChild(restartButton);
       }
     }
 
