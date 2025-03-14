@@ -67,7 +67,7 @@
     activityList.forEach((item) => {
       item.addEventListener("click", (event) => {
         const fileName = event.target.closest("div").dataset.link;
-        window.location.href = `/${fileName}.html`;
+        window.location.href = `${fileName}.html`;
       });
     });
   </script>
