@@ -44,169 +44,128 @@
     <!-- /Usuário não logado -->
 
     <!-- Usuário logado -->
-    <div class="activity-group">
-      <div class="ag-item">
-        <div class="agi-header">
-          <span>Carlos Oliveira</span>
-        </div>
-        <div class="agi-body">
-          <p><i class="fa fa-check"></i> Stroop</p>
-          <p><i class="fa fa-check"></i> Class. afetiva</p>
-        </div>
-        <div class="agi-footer">
-          <a href="#" title="Visualizar resultados da atividade"><i class="fa fa-eye"></i></a>
-          <a href="#" title="Excluir resultados deste usuário"><i class="fa fa-trash"></i></a>
-        </div>
-      </div>
+    <div class="activity-group"></div>
+    <!-- /Usuário logado -->
 
-      <div class="ag-item">
-        <div class="agi-header">
-          <span>Carlos Oliveira</span>
-        </div>
-        <div class="agi-body">
-          <p><i class="fa fa-check"></i> Stroop</p>
-          <p><i class="fa fa-check"></i> Class. afetiva</p>
-        </div>
-        <div class="agi-footer">
-          <a href="#" title="Visualizar resultados da atividade"><i class="fa fa-eye"></i></a>
-          <a href="#" title="Excluir resultados deste usuário"><i class="fa fa-trash"></i></a>
-        </div>
-      </div>
-
-      <div class="ag-item">
-        <div class="agi-header">
-          <span>Carlos Oliveira</span>
-        </div>
-        <div class="agi-body">
-          <p><i class="fa fa-check"></i> Stroop</p>
-          <p><i class="fa fa-check"></i> Class. afetiva</p>
-        </div>
-        <div class="agi-footer">
-          <a href="#" title="Visualizar resultados da atividade"><i class="fa fa-eye"></i></a>
-          <a href="#" title="Excluir resultados deste usuário"><i class="fa fa-trash"></i></a>
-        </div>
-      </div>
-    </div>
-    <!-- Usuário logado -->
-  </div>
-
-  <script src="./assets/js/font-awesome.js?ts=" + new Date().getTime()></script>
-  <script src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
-  <script src="./assets/js/spark-md5.js?ts=" + new Date().getTime()></script>
-  <script>
-    const db = new IndexedDBRepository("db", 2);
-    async function dbInit() {
-      await db.init(["user", "activity"]);
-    }
-    dbInit();
-
-    function generateSecretPassword(pin) {
-      const key = atob("bWFyaWFfYWRtaW4=");
-      return btoa(pin + key).slice(0, 10);
-    }
-
-    function getFormattedDate() {
-      const now = new Date();
-
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const day = String(now.getDate()).padStart(2, "0");
-      const hours = String(now.getHours()).padStart(2, "0");
-      const minutes = String(now.getMinutes()).padStart(2, "0");
-      const seconds = String(now.getSeconds()).padStart(2, "0");
-
-      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    }
-
-    function dateExpired(date) {
-      const dt = new Date(date.replace(" ", "T"));
-      const now = new Date();
-      const diff = now - dt;
-      const diffInMinutes = diff / (1000 * 60);
-      return diffInMinutes >= 30;
-    }
-
-    const loader = document.querySelector(".loader");
-    loader.classList.add("show");
-
-    function loginForm(action) {
-      const form = document.querySelector("#formLogin");
-      if (form) {
-        if (action === "show") {
-          form.style.display = "block";
-          return;
-        }
-        form.style.display = "none";
+    <script src="./assets/js/font-awesome.js?ts=" + new Date().getTime()></script>
+    <script src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
+    <script>
+      const db = new IndexedDBRepository("db", 2);
+      async function dbInit() {
+        await db.init(["user", "activity"]);
       }
-    }
+      dbInit();
 
-    function activityGroup(action) {
-      const form = document.querySelector(".activity-group");
-      if (form) {
-        if (action === "show") {
-          form.style.display = "flex";
-          return;
-        }
-        form.style.display = "none";
+      function generateSecretPassword(pin) {
+        const key = atob("bWFyaWFfYWRtaW4=");
+        return btoa(pin + key).slice(0, 10);
       }
-    }
 
-    async function verifyAuthentication() {
-      const authData = window.localStorage.getItem("auth") ?? null;
-      if (!authData) {
-        window.localStorage.removeItem("auth");
-        if (!window.location.href.includes("area_administrativa.html")) {
-          window.location.href = "./area_administrativa.html";
-        }
-        return;
+      function getFormattedDate() {
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
       }
-      const auth = JSON.parse(authData);
-      const authDate = auth.date;
-      const expired = dateExpired(authDate);
-      if (expired) {
-        alert("Sessão expirou. Faça login novamente");
-        window.localStorage.removeItem("auth");
-        if (!window.location.href.includes("area_administrativa.html")) {
-          window.location.href = "./area_administrativa.html";
-        }
-        return;
+
+      function dateExpired(date) {
+        const dt = new Date(date.replace(" ", "T"));
+        const now = new Date();
+        const diff = now - dt;
+        const diffInMinutes = diff / (1000 * 60);
+        return diffInMinutes >= 30;
       }
-    }
 
-    async function load() {
-      setTimeout(async () => {
-        await verifyAuthentication();
+      const loader = document.querySelector(".loader");
+      loader.classList.add("show");
 
-        // verificar se o usuário está logado
-        const loginFormAction = !window.localStorage.getItem("auth") ? "show" : "hide";
-        loginForm(loginFormAction);
-
-        // carregar as informações dos usuários
-        activityGroup(loginFormAction === "show" ? "hide" : "show");
-        await db.init(["activity"]);
-        const allActivities = await db.getAll("activity");
-        let users = [];
-        allActivities.forEach(async (activity) => {
-          const userId = activity.user_id;
-          const username = activity.username;
-          const activityType = activity.activity_type;
-          const find = users.find(user => user.username === username && user.user_id === userId);
-          if (!find) {
-            users.push({user_id: userId, username: username, activites: [activityType]});
-          } else {
-            const filter = users.filter(item => item.username !== username && item.user_id !== userId);
-            filter.push({user_id: userId, username: username, activites: ["stroop", "affective_classification"]});
-            users = filter;
+      function loginForm(action) {
+        const form = document.querySelector("#formLogin");
+        if (form) {
+          if (action === "show") {
+            form.style.display = "block";
+            return;
           }
-        });
-        
-        const activityGroupElement = document.querySelector(".activity-group");
-        if (activityGroupElement) {
-          activityGroupElement.innerHTML = "";
-          users.forEach(user => {
-            const madeStroop = !user.activites.includes("stroop") ? `style="opacity: 0.2;"` : "";
-            const madeAffectiveClassification = !user.activites.includes("affective_classification") ? `style="opacity: 0.2;"` : "";
-            const html = `
+          form.style.display = "none";
+        }
+      }
+
+      function activityGroup(action) {
+        const form = document.querySelector(".activity-group");
+        if (form) {
+          if (action === "show") {
+            form.style.display = "flex";
+            return;
+          }
+          form.style.display = "none";
+        }
+      }
+
+      async function verifyAuthentication() {
+        const authData = window.localStorage.getItem("auth") ?? null;
+        if (!authData) {
+          window.localStorage.removeItem("auth");
+          if (!window.location.href.includes("area_administrativa.html")) {
+            window.location.href = "./area_administrativa.html";
+          }
+          return;
+        }
+        const auth = JSON.parse(authData);
+        const authDate = auth.date;
+        const expired = dateExpired(authDate);
+        if (expired) {
+          alert("Sessão expirou. Faça login novamente");
+          window.localStorage.removeItem("auth");
+          if (!window.location.href.includes("area_administrativa.html")) {
+            window.location.href = "./area_administrativa.html";
+          }
+          return;
+        }
+      }
+
+      async function load() {
+        setTimeout(async () => {
+          await verifyAuthentication();
+
+          // verificar se o usuário está logado
+          const loginFormAction = !window.localStorage.getItem("auth") ? "show" : "hide";
+          loginForm(loginFormAction);
+
+          // carregar as informações dos usuários
+          activityGroup(loginFormAction === "show" ? "hide" : "show");
+          await db.init(["activity"]);
+          const allActivities = await db.getAll("activity");
+          let users = [];
+          allActivities.forEach(async (activity) => {
+            const userId = activity.user_id;
+            const username = activity.username;
+            const activityType = activity.activity_type;
+            const language = activity.language;
+            const find = users.find(user => user.username === username && user.user_id === userId);
+            if (!find) {
+              users.push({ user_id: userId, username: username, activites: [activityType] });
+            } else {
+              if (!find.activites.includes(activityType)) {
+                const filter = users.filter(item => item.username !== username && item.user_id !== userId);
+                filter.push({ user_id: userId, username: username, activites: ["stroop", "affective_classification"] });
+                users = filter;
+              }
+            }
+          });
+
+          const activityGroupElement = document.querySelector(".activity-group");
+          if (activityGroupElement) {
+            activityGroupElement.innerHTML = "";
+            users.forEach(user => {
+              const madeStroop = !user.activites.includes("stroop") ? `style="opacity: 0.2;"` : "";
+              const madeAffectiveClassification = !user.activites.includes("affective_classification") ? `style="opacity: 0.2;"` : "";
+              const html = `
             <div class="ag-item">
               <div class="agi-header">
                 <span>${user.username}</span>
@@ -216,47 +175,120 @@
                 <p ${madeAffectiveClassification}><i class="fa fa-check"></i> Class. afetiva</p>
               </div>
               <div class="agi-footer">
-                <a href="#" title="Visualizar resultados da atividade"><i class="fa fa-eye"></i></a>
-                <a href="#" title="Excluir resultados deste usuário"><i class="fa fa-trash"></i></a>
+                <a href="#" class="seeResults" id="${user.user_id}" title="Visualizar resultados da atividade"><i class="fa fa-eye"></i></a>
+                <a href="#" class="deleteResults" id="${user.user_id}" title="Excluir resultados deste usuário"><i class="fa fa-trash"></i></a>
               </div>
             </div>
             `;
-            activityGroupElement.insertAdjacentHTML("beforeend", html);
+              activityGroupElement.insertAdjacentHTML("beforeend", html);
+            });
+
+            if (users.length === 0) {
+              activityGroupElement.insertAdjacentHTML("beforeend", "<p style='text-align: center;'>Nenhuma atividade realizada</p>");
+            }
+          }
+
+          loader.classList.remove("show");
+        }, 2000);
+      }
+
+      load();
+
+      setTimeout(() => {
+        const deleteResultsButtons = document.querySelectorAll(".deleteResults");
+        deleteResultsButtons.forEach(async (button) => {
+          button.addEventListener("click", async (event) => {
+            event.preventDefault();
+            const opt = confirm("Tem certeza que deseja remover este registro?");
+            if (opt) {
+              const userId = Number(event.target.closest("a").id);
+              await db.init(["activity"]);
+              const activity = await db.search("activity", { user_id: userId });
+              activity.forEach(async (item) => {
+                const id = item.id;
+                await db.delete("activity", id);
+              });
+              alert("Registro removido com sucesso");
+              window.location.reload();
+            }
           });
-        }
+        });
+      }, 2300);
 
-        loader.classList.remove("show");
-      }, 2000);
-    }
+      setTimeout(() => {
+        const seeResultsButon = document.querySelectorAll(".seeResults");
+        seeResultsButon.forEach(async (button) => {
+          button.addEventListener("click", async (event) => {
+            const userId = Number(event.target.closest("a").id);
+            window.localStorage.setItem("stats", userId);
+            window.location.href = "./activity_stats.html";
+          });
+        });
+      }, 2300);
 
-    load();
+      const formLogin = document.querySelector("#formLogin");
+      if (formLogin) {
+        formLogin.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          if (!window.localStorage.getItem("hasAuth") && !window.localStorage.getItem("pin")) {
+            alert("Você precisa criar um PIN de acesso");
+            window.location.href = "./generate_password.html";
+            return;
+          }
+          const pin = document.querySelector("#pin").value.trim();
+          const secret = generateSecretPassword(pin);
+          const hasAuth = secret === window.localStorage.getItem("pin");
+          if (!hasAuth) {
+            alert("PIN incorreto. Tente novamente.");
+            return;
+          }
+          window.localStorage.removeItem("auth");
+          const params = {
+            is_auth: true,
+            date: getFormattedDate()
+          };
+          window.localStorage.setItem("auth", JSON.stringify(params));
+          window.location.reload();
+        });
+      }
 
-    const formLogin = document.querySelector("#formLogin");
-    if (formLogin) {
-      formLogin.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        if (!window.localStorage.getItem("hasAuth") && !window.localStorage.getItem("pin")) {
-          alert("Você precisa criar um PIN de acesso");
-          window.location.href = "./generate_password.html";
+      function exportTableToCSV(tableId, filename) {
+        const table = document.getElementById(tableId);
+        if (!table) {
+          console.error("Tabela não encontrada!");
           return;
         }
-        const pin = document.querySelector("#pin").value.trim();
-        const secret = generateSecretPassword(pin);
-        const hasAuth = secret === window.localStorage.getItem("pin");
-        if (!hasAuth) {
-          alert("PIN incorreto. Tente novamente.");
-          return;
-        }
-        window.localStorage.removeItem("auth");
-        const params = {
-          is_auth: true,
-          date: getFormattedDate()
-        };
-        window.localStorage.setItem("auth", JSON.stringify(params));
-        window.location.reload();
-      });
-    }
-  </script>
+
+        let csv = [];
+        const rows = table.querySelectorAll("tr");
+
+        rows.forEach((row, index) => {
+          let rowData = [];
+          const cols = row.querySelectorAll("th, td");
+
+          cols.forEach((col, cellIndex) => {
+            let text = col.innerText.trim().replace(/"/g, '""');
+            if (index === 0 && cellIndex === 0 && text === "ID") {
+              text = "'ID";
+            }
+            rowData.push(text);
+          });
+
+          csv.push(rowData.join(";"));
+        });
+
+        const csvContent = "\uFEFF" + csv.join("\n");
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+    </script>
 </body>
 
 </html>

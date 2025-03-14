@@ -140,7 +140,7 @@
       }
 
       await db.init(["activity"]);
-      const userAlreadyMadeActivity = await db.search("activity", { email: currentUser.email, activity_type: "affective_classification" });
+      const userAlreadyMadeActivity = await db.search("activity", { email: currentUser.email, activity_type: "affective_classification", language });
       if (userAlreadyMadeActivity.length > 0) {
         alert("Usuário já fez esta atividade");
         window.location.href = "./index.html";

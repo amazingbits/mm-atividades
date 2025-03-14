@@ -150,7 +150,7 @@
       }
 
       await db.init(["activity"]);
-      const userAlreadyMade = await db.search("activity", {user_id: currentUser.id, activity_type: "stroop"});
+      const userAlreadyMade = await db.search("activity", {user_id: currentUser.id, activity_type: "stroop", language: selectedLanguage});
       if (userAlreadyMade.length > 0) {
         alert("Este usuário já realizou esta atividade");
         window.location.href = "./index.html";
@@ -211,6 +211,7 @@
             username: currentUser.username,
             email: currentUser.email,
             activity_type: "stroop",
+            language: selectedLanguage,
             results,
           };
           await db.init(["activity"]);

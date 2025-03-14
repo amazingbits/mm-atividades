@@ -281,6 +281,7 @@ table {
   border-collapse: collapse;
   margin-bottom: 20px;
   font-size: 0.8rem; /* Tamanho da fonte reduzido */
+  text-align: center;
 }
 
 th, td {
@@ -412,4 +413,28 @@ form a {
   margin-bottom: 1rem;
   display: flex;
   justify-content: flex-end;
+}
+
+.tabela {
+  width: 100%;
+  max-width: var(--max-width);
+  max-height: calc(100vh - 400px);
+  overflow: auto;
+}
+
+.tabela h2 {
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+.tabela a {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--border-radius);
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+  font-weight: 300;
+  font-size: 0.8rem;
+  margin: 0.4rem 0;
+  display: inline-flex;
+  cursor: pointer;
 }

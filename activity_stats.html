@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maria Moog - Resultados do usuário</title>
+  <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/css/fonts.css">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+
+<body>
+  <!-- loader -->
+  <div class="loader">
+    <img src="./assets/img/loader.gif" alt="Uma animação de cérebro sorrindo">
+    <p>Carregando...</p>
+  </div>
+  <!-- /loader -->
+
+  <!-- área administrativa btn -->
+  <div class="top-left-btn">
+    <a href="./area_administrativa.html"><i class="fa fa-arrow-left"></i> Voltar</a>
+  </div>
+  <!-- /área administrativa btn -->
+
+  <div class="container">
+
+    <div class="title">
+      <img src="./assets/img/icon.png"
+        alt="Imagem do desenho de um cérebro humano com multiplas cores separadas por área do cérebro">
+      <p>Resultados do usuário</p>
+    </div>
+
+    <div class="tabela">
+      <h2>Stroop (Português)</h2>
+      <a onclick="exportTableToCSV('stroop_pt', 'stroop_pt.csv')">Gerar .CSV</a>
+      <table id="stroop_pt">
+        <thead>
+          <tr>
+            <th>Palavra</th>
+            <th>Tempo</th>
+            <th>Congruência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cadeira</td>
+            <td>0.47</td>
+            <td>Sim</td>
+          </tr>
+          <tr>
+            <td>Amor</td>
+            <td>0.35</td>
+            <td>Não</td>
+          </tr>
+          <tr>
+            <td>Mesa</td>
+            <td>0.33</td>
+            <td>Sim</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Stroop (Inglês)</h2>
+      <a onclick="exportTableToCSV('stroop_en', 'stroop_en.csv')">Gerar .CSV</a>
+      <table id="stroop_en">
+        <thead>
+          <tr>
+            <th>Palavra</th>
+            <th>Tempo</th>
+            <th>Congruência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chair</td>
+            <td>0.47</td>
+            <td>Sim</td>
+          </tr>
+          <tr>
+            <td>Love</td>
+            <td>0.35</td>
+            <td>Não</td>
+          </tr>
+          <tr>
+            <td>Table</td>
+            <td>0.33</td>
+            <td>Sim</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Class. Afetiva (Português)</h2>
+      <a onclick="exportTableToCSV('affective_classification_pt', 'affective_classification_pt.csv')">Gerar .CSV</a>
+      <table id="affective_classification_pt">
+        <thead>
+          <tr>
+            <th>Palavra</th>
+            <th title="Nada emocional/neutra">NE</th>
+            <th title="Pouco emocional">PE</th>
+            <th title="Moderadamente emocional">ME</th>
+            <th title="Muito emocional">MuE</th>
+            <th title="Completamente emocional">CE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cadeira</td>
+            <td>*</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Amor</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>*</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Mesa</td>
+            <td></td>
+            <td>*</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Class. Afetiva (Inglês)</h2>
+      <a onclick="exportTableToCSV('affective_classification_en', 'affective_classification_en.csv')">Gerar .CSV</a>
+      <table id="affective_classification_en">
+        <thead>
+          <tr>
+            <th>Palavra</th>
+            <th title="Nada emocional/neutra">NE</th>
+            <th title="Pouco emocional">PE</th>
+            <th title="Moderadamente emocional">ME</th>
+            <th title="Muito emocional">MuE</th>
+            <th title="Completamente emocional">CE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Chair</td>
+            <td>*</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Love</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>*</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Table</td>
+            <td></td>
+            <td><i class="fa fa-check"></i></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Class. Afetiva (Geral)</h2>
+      <a onclick="exportTableToCSV('affective_classification_gen', 'affective_classification_gen.csv')">Gerar .CSV</a>
+      <table id="affective_classification_gen">
+        <thead>
+          <tr>
+            <th>Palavra</th>
+            <th title="Nada emocional/neutra">NE</th>
+            <th title="Pouco emocional">PE</th>
+            <th title="Moderadamente emocional">ME</th>
+            <th title="Muito emocional">MuE</th>
+            <th title="Completamente emocional">CE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cadeira</td>
+            <td>100%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+          </tr>
+          <tr>
+            <td>Chair</td>
+            <td>0</td>
+            <td>0%</td>
+            <td>100%</td>
+            <td>0%</td>
+            <td>0%</td>
+          </tr>
+          <tr>
+            <td>Amor</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>100%</td>
+          </tr>
+          <tr>
+            <td>Love</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>100%</td>
+          </tr>
+          <tr>
+            <td>Mesa</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>100%</td>
+            <td>0%</td>
+          </tr>
+          <tr>
+            <td>Table</td>
+            <td>0%</td>
+            <td>0%</td>
+            <td>100%</td>
+            <td>0%</td>
+            <td>0%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script src="./assets/js/font-awesome.js?ts=" + new Date().getTime()></script>
+  <script src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
+  <script>
+    const db = new IndexedDBRepository("db", 2);
+    async function dbInit() {
+      await db.init(["user", "activity"]);
+    }
+    dbInit();
+
+    function dateExpired(date) {
+      const dt = new Date(date.replace(" ", "T"));
+      const now = new Date();
+      const diff = now - dt;
+      const diffInMinutes = diff / (1000 * 60);
+      return diffInMinutes >= 30;
+    }
+
+    const loader = document.querySelector(".loader");
+    //loader.classList.add("show");
+
+    async function verifyAuthentication() {
+      const authData = window.localStorage.getItem("auth") ?? null;
+      if (!authData) {
+        window.localStorage.removeItem("auth");
+        if (!window.location.href.includes("area_administrativa.html")) {
+          window.location.href = "./area_administrativa.html";
+        }
+        return;
+      }
+      const auth = JSON.parse(authData);
+      const authDate = auth.date;
+      const expired = dateExpired(authDate);
+      if (expired) {
+        alert("Sessão expirou. Faça login novamente");
+        window.localStorage.removeItem("auth");
+        if (!window.location.href.includes("area_administrativa.html")) {
+          window.location.href = "./area_administrativa.html";
+        }
+        return;
+      }
+    }
+
+    verifyAuthentication();
+
+    function exportTableToCSV(tableId, filename) {
+      const table = document.getElementById(tableId);
+      if (!table) {
+        console.error("Tabela não encontrada!");
+        return;
+      }
+
+      let csv = [];
+      const rows = table.querySelectorAll("tr");
+
+      rows.forEach((row, index) => {
+        let rowData = [];
+        const cols = row.querySelectorAll("th, td");
+
+        cols.forEach((col, cellIndex) => {
+          let text = col.innerText.trim().replace(/"/g, '""');
+          if (index === 0 && cellIndex === 0 && text === "ID") {
+            text = "'ID";
+          }
+          rowData.push(text);
+        });
+
+        csv.push(rowData.join(";"));
+      });
+
+      const csvContent = "\uFEFF" + csv.join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const link = document.createElement("a");
+
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+  </script>
+</body>
+
+</html>
