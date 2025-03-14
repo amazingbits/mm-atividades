@@ -50,6 +50,7 @@
     <script src="./assets/js/font-awesome.js?ts=" + new Date().getTime()></script>
     <script src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
     <script>
+      window.localStorage.removeItem("currentUser");
       const db = new IndexedDBRepository("db", 2);
       async function dbInit() {
         await db.init(["user", "activity"]);

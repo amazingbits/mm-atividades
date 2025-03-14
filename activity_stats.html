@@ -29,214 +29,42 @@
     <div class="title">
       <img src="./assets/img/icon.png"
         alt="Imagem do desenho de um cérebro humano com multiplas cores separadas por área do cérebro">
+      <h1 id="usernameTitle"></h1>
       <p>Resultados do usuário</p>
     </div>
 
     <div class="tabela">
-      <h2>Stroop (Português)</h2>
-      <a onclick="exportTableToCSV('stroop_pt', 'stroop_pt.csv')">Gerar .CSV</a>
-      <table id="stroop_pt">
-        <thead>
-          <tr>
-            <th>Palavra</th>
-            <th>Tempo</th>
-            <th>Congruência</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cadeira</td>
-            <td>0.47</td>
-            <td>Sim</td>
-          </tr>
-          <tr>
-            <td>Amor</td>
-            <td>0.35</td>
-            <td>Não</td>
-          </tr>
-          <tr>
-            <td>Mesa</td>
-            <td>0.33</td>
-            <td>Sim</td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="table_stroop_pt">
+        <h2>Stroop (Português)</h2>
+        <a onclick="exportTableToCSV('stroop_pt', 'stroop_pt.csv')">Gerar .CSV</a>
+      </div>
 
-      <h2>Stroop (Inglês)</h2>
-      <a onclick="exportTableToCSV('stroop_en', 'stroop_en.csv')">Gerar .CSV</a>
-      <table id="stroop_en">
-        <thead>
-          <tr>
-            <th>Palavra</th>
-            <th>Tempo</th>
-            <th>Congruência</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Chair</td>
-            <td>0.47</td>
-            <td>Sim</td>
-          </tr>
-          <tr>
-            <td>Love</td>
-            <td>0.35</td>
-            <td>Não</td>
-          </tr>
-          <tr>
-            <td>Table</td>
-            <td>0.33</td>
-            <td>Sim</td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="table_stroop_en">
+        <h2>Stroop (Inglês)</h2>
+        <a onclick="exportTableToCSV('stroop_en', 'stroop_en.csv')">Gerar .CSV</a>
+      </div>
 
-      <h2>Class. Afetiva (Português)</h2>
-      <a onclick="exportTableToCSV('affective_classification_pt', 'affective_classification_pt.csv')">Gerar .CSV</a>
-      <table id="affective_classification_pt">
-        <thead>
-          <tr>
-            <th>Palavra</th>
-            <th title="Nada emocional/neutra">NE</th>
-            <th title="Pouco emocional">PE</th>
-            <th title="Moderadamente emocional">ME</th>
-            <th title="Muito emocional">MuE</th>
-            <th title="Completamente emocional">CE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cadeira</td>
-            <td>*</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Amor</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>*</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Mesa</td>
-            <td></td>
-            <td>*</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="table_affective_classification_pt">
+        <h2>Class. Afetiva (Português)</h2>
+        <a onclick="exportTableToCSV('affective_classification_pt', 'affective_classification_pt.csv')">Gerar .CSV</a>
+      </div>
 
-      <h2>Class. Afetiva (Inglês)</h2>
-      <a onclick="exportTableToCSV('affective_classification_en', 'affective_classification_en.csv')">Gerar .CSV</a>
-      <table id="affective_classification_en">
-        <thead>
-          <tr>
-            <th>Palavra</th>
-            <th title="Nada emocional/neutra">NE</th>
-            <th title="Pouco emocional">PE</th>
-            <th title="Moderadamente emocional">ME</th>
-            <th title="Muito emocional">MuE</th>
-            <th title="Completamente emocional">CE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Chair</td>
-            <td>*</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Love</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>*</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Table</td>
-            <td></td>
-            <td><i class="fa fa-check"></i></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="table_affective_classification_en">
+        <h2>Class. Afetiva (Inglês)</h2>
+        <a onclick="exportTableToCSV('affective_classification_en', 'affective_classification_en.csv')">Gerar .CSV</a>
+      </div>
 
-      <h2>Class. Afetiva (Geral)</h2>
-      <a onclick="exportTableToCSV('affective_classification_gen', 'affective_classification_gen.csv')">Gerar .CSV</a>
-      <table id="affective_classification_gen">
-        <thead>
-          <tr>
-            <th>Palavra</th>
-            <th title="Nada emocional/neutra">NE</th>
-            <th title="Pouco emocional">PE</th>
-            <th title="Moderadamente emocional">ME</th>
-            <th title="Muito emocional">MuE</th>
-            <th title="Completamente emocional">CE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cadeira</td>
-            <td>100%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-          </tr>
-          <tr>
-            <td>Chair</td>
-            <td>0</td>
-            <td>0%</td>
-            <td>100%</td>
-            <td>0%</td>
-            <td>0%</td>
-          </tr>
-          <tr>
-            <td>Amor</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>100%</td>
-          </tr>
-          <tr>
-            <td>Love</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>100%</td>
-          </tr>
-          <tr>
-            <td>Mesa</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>100%</td>
-            <td>0%</td>
-          </tr>
-          <tr>
-            <td>Table</td>
-            <td>0%</td>
-            <td>0%</td>
-            <td>100%</td>
-            <td>0%</td>
-            <td>0%</td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="table_affective_classification_gen_pt">
+        <h2>Class. Afetiva Geral (Português)</h2>
+        <a onclick="exportTableToCSV('affective_classification_gen_pt', 'affective_classification_gen_pt.csv')">Gerar
+          .CSV</a>
+      </div>
+
+      <div id="table_affective_classification_gen_en">
+        <h2>Class. Afetiva Geral (Inglês)</h2>
+        <a onclick="exportTableToCSV('affective_classification_gen_en', 'affective_classification_gen_en.csv')">Gerar
+          .CSV</a>
+      </div>
     </div>
 
   </div>
@@ -259,7 +87,7 @@
     }
 
     const loader = document.querySelector(".loader");
-    //loader.classList.add("show");
+    loader.classList.add("show");
 
     async function verifyAuthentication() {
       const authData = window.localStorage.getItem("auth") ?? null;
@@ -283,7 +111,336 @@
       }
     }
 
+    async function getUsername() {
+      const stats = window.localStorage.getItem("stats") ?? null;
+      if (!stats) return;
+      await db.init(["user"]);
+      const user = await db.search("user", { id: Number(stats) });
+      if (!user) return;
+      document.querySelector("#usernameTitle").innerHTML = user[0].username;
+    }
+
+    async function loadStroopInPortguese() {
+      const tableElement = document.querySelector("#table_stroop_pt");
+      await db.init(["activity"]);
+      const userId = window.localStorage.getItem("stats") ?? "0";
+      const activityList = await db.search("activity", { user_id: Number(userId), activity_type: "stroop", language: "pt" });
+      if (activityList.length === 0) {
+        tableElement.innerHTML = "";
+        return;
+      }
+      const activity = activityList[0];
+      let tableRows = "";
+      activity.results.forEach(result => {
+        const isCorrect = result.correct ? "Sim" : "Não";
+        tableRows += `
+          <tr>
+            <td style='color: ${result.color}; font-weight: 700;'>${result.word}</td>
+            <td>${result.responseTime}</td>
+            <td>${isCorrect}</td>
+          </tr>
+        `;
+      });
+      const table = `
+          <table id="stroop_pt">
+            <thead>
+              <tr>
+                <th>Palavra</th>
+                <th>Tempo</th>
+                <th>Congruência</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRows}
+            </tbody>
+          </table>
+      `;
+      tableElement.insertAdjacentHTML("beforeend", table);
+    }
+
+    async function loadStroopInEnglish() {
+      const tableElement = document.querySelector("#table_stroop_en");
+      await db.init(["activity"]);
+      const userId = window.localStorage.getItem("stats") ?? "0";
+      const activityList = await db.search("activity", { user_id: Number(userId), activity_type: "stroop", language: "en" });
+      if (activityList.length === 0) {
+        tableElement.innerHTML = "";
+        return;
+      }
+      const activity = activityList[0];
+      let tableRows = "";
+      activity.results.forEach(result => {
+        const isCorrect = result.correct ? "Sim" : "Não";
+        tableRows += `
+          <tr>
+            <td style='color: ${result.color}; font-weight: 700;'>${result.word}</td>
+            <td>${result.responseTime}</td>
+            <td>${isCorrect}</td>
+          </tr>
+        `;
+      });
+      const table = `
+          <table id="stroop_en">
+            <thead>
+              <tr>
+                <th>Palavra</th>
+                <th>Tempo</th>
+                <th>Congruência</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRows}
+            </tbody>
+          </table>
+      `;
+      tableElement.insertAdjacentHTML("beforeend", table);
+    }
+
+    async function loadAffectiveClassificationInPortuguese() {
+      const tableElement = document.querySelector("#table_affective_classification_pt");
+      await db.init(["activity"]);
+      const userId = window.localStorage.getItem("stats") ?? "0";
+      const activityList = await db.search("activity", { user_id: Number(userId), activity_type: "affective_classification", language: "pt" });
+      if (activityList.length === 0) {
+        tableElement.innerHTML = "";
+        return;
+      }
+      const activity = activityList[0];
+      let tableRows = "";
+      activity.results.forEach(result => {
+        tableRows += `
+          <tr>
+            <td>${result.word}</td>
+            <td>${result.emotion == "nada emocional/neutra" ? "X" : ""}</td>
+            <td>${result.emotion == "pouco emocional" ? "X" : ""}</td>
+            <td>${result.emotion == "moderadamente emocional" ? "X" : ""}</td>
+            <td>${result.emotion == "muito emocional" ? "X" : ""}</td>
+            <td>${result.emotion == "completamente emocional" ? "X" : ""}</td>
+          </tr>
+        `;
+      });
+      const table = `
+          <table id="affective_classification_pt">
+            <thead>
+              <tr>
+                <th>Palavra</th>
+                <th title="nada emocional/neutra">NE</th>
+                <th title="pouco emocional">PE</th>
+                <th title="moderadamente emocional">ME</th>
+                <th title="muito emocional">MuE</th>
+                <th title="completamente emocional">CE</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRows}
+            </tbody>
+          </table>
+      `;
+      tableElement.insertAdjacentHTML("beforeend", table);
+    }
+
+    async function loadAffectiveClassificationInEnglish() {
+      const tableElement = document.querySelector("#table_affective_classification_en");
+      await db.init(["activity"]);
+      const userId = window.localStorage.getItem("stats") ?? "0";
+      const activityList = await db.search("activity", { user_id: Number(userId), activity_type: "affective_classification", language: "en" });
+      if (activityList.length === 0) {
+        tableElement.innerHTML = "";
+        return;
+      }
+      const activity = activityList[0];
+      let tableRows = "";
+      activity.results.forEach(result => {
+        tableRows += `
+          <tr>
+            <td>${result.word}</td>
+            <td>${result.emotion == "nada emocional/neutra" ? "X" : ""}</td>
+            <td>${result.emotion == "pouco emocional" ? "X" : ""}</td>
+            <td>${result.emotion == "moderadamente emocional" ? "X" : ""}</td>
+            <td>${result.emotion == "muito emocional" ? "X" : ""}</td>
+            <td>${result.emotion == "completamente emocional" ? "X" : ""}</td>
+          </tr>
+        `;
+      });
+      const table = `
+          <table id="affective_classification_en">
+            <thead>
+              <tr>
+                <th>Palavra</th>
+                <th title="nada emocional/neutra">NE</th>
+                <th title="pouco emocional">PE</th>
+                <th title="moderadamente emocional">ME</th>
+                <th title="muito emocional">MuE</th>
+                <th title="completamente emocional">CE</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRows}
+            </tbody>
+          </table>
+      `;
+      tableElement.insertAdjacentHTML("beforeend", table);
+    }
+
+    async function loadGeneralPortuguese() {
+      const tableElement = document.querySelector("#table_affective_classification_gen_pt");
+      await db.init(["activity"]);
+      const activityList = await db.search("activity", { activity_type: "affective_classification", language: "pt" });
+      if (activityList.length === 0) {
+        tableElement.innerHTML = "";
+        return;
+      }
+      const results = [];
+      activityList.forEach(item => {
+        item.results.forEach(activity => {
+          results.push(activity);
+        });
+      });
+      const wordsList = [...new Set(results.map(item => item.word))];
+      const wordStats = {};
+      wordsList.forEach(word => {
+        wordStats[word] = {
+          total: 0,
+          emotions: {
+            "nada emocional/neutra": 0,
+            "pouco emocional": 0,
+            "moderadamente emocional": 0,
+            "muito emocional": 0,
+            "completamente emocional": 0,
+          },
+        };
+      });
+      results.forEach(result => {
+        const { word, emotion } = result;
+
+        if (wordStats[word]) {
+          wordStats[word].total++;
+          wordStats[word].emotions[emotion]++;
+        }
+      });
+
+      let tableRows = "";
+      wordsList.forEach(word => {
+        let currentRow = "<tr>";
+        currentRow += `<td>${word}</td>`;
+        const emotions = wordStats[word].emotions;
+        const total = wordStats[word].total;
+        Object.keys(emotions).forEach(emotion => {
+          const count = emotions[emotion];
+          const percentage = total > 0 ? ((count / total) * 100).toFixed(2) : "0.00";
+          currentRow += `<td>${percentage}%</td>`;
+        });
+        currentRow += "</tr>";
+        tableRows += currentRow;
+      });
+
+      const table = `
+          <table id="affective_classification_gen_pt">
+            <thead>
+              <tr>
+                <th>Palavra</th>
+                <th title="nada emocional/neutra">NE</th>
+                <th title="pouco emocional">PE</th>
+                <th title="moderadamente emocional">ME</th>
+                <th title="muito emocional">MuE</th>
+                <th title="completamente emocional">CE</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRows}
+            </tbody>
+          </table>
+      `;
+      tableElement.insertAdjacentHTML("beforeend", table);
+    }
+
+    async function loadGeneralEnglish() {
+      const tableElement = document.querySelector("#table_affective_classification_gen_en");
+      await db.init(["activity"]);
+      const activityList = await db.search("activity", { activity_type: "affective_classification", language: "en" });
+      if (activityList.length === 0) {
+        tableElement.innerHTML = "";
+        return;
+      }
+      const results = [];
+      activityList.forEach(item => {
+        item.results.forEach(activity => {
+          results.push(activity);
+        });
+      });
+      const wordsList = [...new Set(results.map(item => item.word))];
+      const wordStats = {};
+      wordsList.forEach(word => {
+        wordStats[word] = {
+          total: 0,
+          emotions: {
+            "nada emocional/neutra": 0,
+            "pouco emocional": 0,
+            "moderadamente emocional": 0,
+            "muito emocional": 0,
+            "completamente emocional": 0,
+          },
+        };
+      });
+      results.forEach(result => {
+        const { word, emotion } = result;
+
+        if (wordStats[word]) {
+          wordStats[word].total++;
+          wordStats[word].emotions[emotion]++;
+        }
+      });
+
+      let tableRows = "";
+      wordsList.forEach(word => {
+        let currentRow = "<tr>";
+        currentRow += `<td>${word}</td>`;
+        const emotions = wordStats[word].emotions;
+        const total = wordStats[word].total;
+        Object.keys(emotions).forEach(emotion => {
+          const count = emotions[emotion];
+          const percentage = total > 0 ? ((count / total) * 100).toFixed(2) : "0.00";
+          currentRow += `<td>${percentage}%</td>`;
+        });
+        currentRow += "</tr>";
+        tableRows += currentRow;
+      });
+
+      const table = `
+          <table id="affective_classification_gen_en">
+            <thead>
+              <tr>
+                <th>Palavra</th>
+                <th title="nada emocional/neutra">NE</th>
+                <th title="pouco emocional">PE</th>
+                <th title="moderadamente emocional">ME</th>
+                <th title="muito emocional">MuE</th>
+                <th title="completamente emocional">CE</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRows}
+            </tbody>
+          </table>
+      `;
+      tableElement.insertAdjacentHTML("beforeend", table);
+    }
+
+    async function load() {
+      setTimeout(async () => {
+        await getUsername();
+        await loadStroopInPortguese();
+        await loadStroopInEnglish();
+        await loadAffectiveClassificationInPortuguese();
+        await loadAffectiveClassificationInEnglish();
+        await loadGeneralPortuguese();
+        await loadGeneralEnglish();
+        loader.classList.remove("show");
+      }, 2000);
+    }
+
     verifyAuthentication();
+    load();
 
     function exportTableToCSV(tableId, filename) {
       const table = document.getElementById(tableId);
