@@ -29,33 +29,6 @@ function getFormattedDate() {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
-const addUserForm = document.querySelector("#addUser");
-if (addUserForm) {
-  addUserForm.addEventListener("submit", async (event) => {
-    document.querySelector(".loader").classList.add("show");
-    event.preventDefault();
-    setTimeout(async () => {
-      const username = document.querySelector("input[name='username']").value.trim();
-      const email = document.querySelector("input[name='email']").value.trim();
-
-      const params = {
-        username: username.toUpperCase(), 
-        email: email.toLowerCase(),
-        created_at: getFormattedDate(),
-      };
-      
-      await db.init(["user"]);
-      const userAlreadyExists = await db.search("user", {email});
-      if (userAlreadyExists.length === 0) {
-        await db.add("user", params);
-      }
-      const currentUser = await db.search("user", {email});
-      window.localStorage.setItem("currentUser", JSON.stringify(currentUser[0]));
-      window.location.href = "../../escolher_atividade.html";
-    }, 1000);
-  });
-}
-
 const activityList = document.querySelectorAll(".activity-item");
 activityList.forEach((item) => {
   item.addEventListener("click", (event) => {

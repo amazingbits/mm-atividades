@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="./assets/css/fonts.css">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
+
 <body>
   <!-- loader -->
   <div class="loader">
@@ -25,7 +27,8 @@
   <div class="container">
 
     <div class="title">
-      <img src="./assets/img/icon.png" alt="Imagem do desenho de um cérebro humano com multiplas cores separadas por área do cérebro">
+      <img src="./assets/img/icon.png"
+        alt="Imagem do desenho de um cérebro humano com multiplas cores separadas por área do cérebro">
       <h1>Maria Moog</h1>
       <p>Entre com os seus dados</p>
     </div>
@@ -68,6 +71,34 @@
         }
       })();
     });
+
+    const addUserForm = document.querySelector("#addUser");
+    if (addUserForm) {
+      addUserForm.addEventListener("submit", async (event) => {
+        document.querySelector(".loader").classList.add("show");
+        event.preventDefault();
+        setTimeout(async () => {
+          const username = document.querySelector("input[name='username']").value.trim();
+          const email = document.querySelector("input[name='email']").value.trim();
+
+          const params = {
+            username: username.toUpperCase(),
+            email: email.toLowerCase(),
+            created_at: getFormattedDate(),
+          };
+
+          await db.init(["user"]);
+          const userAlreadyExists = await db.search("user", { email });
+          if (userAlreadyExists.length === 0) {
+            await db.add("user", params);
+          }
+          const currentUser = await db.search("user", { email });
+          window.localStorage.setItem("currentUser", JSON.stringify(currentUser[0]));
+          window.location.href = "./escolher_atividade.html";
+        }, 1000);
+      });
+    }
   </script>
 </body>
+
 </html>
