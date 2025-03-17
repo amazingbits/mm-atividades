@@ -439,3 +439,63 @@ form a {
   display: inline-flex;
   cursor: pointer;
 }
+
+.instructions-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.instructions-wrapper h1 {
+  color: var(--color-primary);
+  font-size: 1.6rem;
+}
+
+.instructions-wrapper hr {
+  background-color: var(--color-primary);
+  height: 1px;
+}
+
+.instructions-wrapper p,
+.instructions-wrapper ul li {
+  text-align: justify;
+  font-size: 0.8rem;
+  color: var(--color-primary);
+}
+
+.instructions-wrapper ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.instructions-wrapper ul li {
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.instructions-wrapper p span {
+  font-weight: 700;
+}
+
+.instructions-wrapper .i-box,
+.instructions-wrapper ul {
+  background-color: var(--color-secondary);
+  box-shadow: var(--shadow);
+  list-style: none;
+  padding: 1rem;
+}
+
+.instructions-wrapper a {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 1rem;
+  padding: 0.6rem;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}

@@ -117,7 +117,7 @@
       await db.init(["user"]);
       const user = await db.search("user", { id: Number(stats) });
       if (!user) return;
-      document.querySelector("#usernameTitle").innerHTML = user[0].username;
+      document.querySelector("#usernameTitle").innerHTML = `${user[0].username} (${user[0].user_id})`;
     }
 
     async function loadStroopInPortguese() {
@@ -211,11 +211,12 @@
         tableRows += `
           <tr>
             <td>${result.word}</td>
-            <td>${result.emotion == "nada emocional/neutra" ? "X" : ""}</td>
-            <td>${result.emotion == "pouco emocional" ? "X" : ""}</td>
-            <td>${result.emotion == "moderadamente emocional" ? "X" : ""}</td>
-            <td>${result.emotion == "muito emocional" ? "X" : ""}</td>
-            <td>${result.emotion == "completamente emocional" ? "X" : ""}</td>
+            <td>${result.response_time}</td>
+            <td>${result.emotion.toLowerCase() == "nada emocional/neutra" ? "X" : ""}</td>
+            <td>${result.emotion.toLowerCase() == "pouco emocional" ? "X" : ""}</td>
+            <td>${result.emotion.toLowerCase() == "moderadamente emocional" ? "X" : ""}</td>
+            <td>${result.emotion.toLowerCase() == "muito emocional" ? "X" : ""}</td>
+            <td>${result.emotion.toLowerCase() == "completamente emocional" ? "X" : ""}</td>
           </tr>
         `;
       });
@@ -224,6 +225,7 @@
             <thead>
               <tr>
                 <th>Palavra</th>
+                <th>Tempo</th>
                 <th title="nada emocional/neutra">NE</th>
                 <th title="pouco emocional">PE</th>
                 <th title="moderadamente emocional">ME</th>
@@ -254,11 +256,12 @@
         tableRows += `
           <tr>
             <td>${result.word}</td>
-            <td>${result.emotion == "nada emocional/neutra" ? "X" : ""}</td>
-            <td>${result.emotion == "pouco emocional" ? "X" : ""}</td>
-            <td>${result.emotion == "moderadamente emocional" ? "X" : ""}</td>
-            <td>${result.emotion == "muito emocional" ? "X" : ""}</td>
-            <td>${result.emotion == "completamente emocional" ? "X" : ""}</td>
+            <td>${result.response_time}</td>
+            <td>${result.emotion.toLowerCase() == "nada emocional/neutra" ? "X" : ""}</td>
+            <td>${result.emotion.toLowerCase() == "pouco emocional" ? "X" : ""}</td>
+            <td>${result.emotion.toLowerCase() == "moderadamente emocional" ? "X" : ""}</td>
+            <td>${result.emotion.toLowerCase() == "muito emocional" ? "X" : ""}</td>
+            <td>${result.emotion.toLowerCase() == "completamente emocional" ? "X" : ""}</td>
           </tr>
         `;
       });
@@ -267,6 +270,7 @@
             <thead>
               <tr>
                 <th>Palavra</th>
+                <th>Tempo</th>
                 <th title="nada emocional/neutra">NE</th>
                 <th title="pouco emocional">PE</th>
                 <th title="moderadamente emocional">ME</th>
@@ -315,7 +319,7 @@
 
         if (wordStats[word]) {
           wordStats[word].total++;
-          wordStats[word].emotions[emotion]++;
+          wordStats[word].emotions[emotion.toLowerCase()]++;
         }
       });
 
@@ -387,7 +391,7 @@
 
         if (wordStats[word]) {
           wordStats[word].total++;
-          wordStats[word].emotions[emotion]++;
+          wordStats[word].emotions[emotion.toLowerCase()]++;
         }
       });
 

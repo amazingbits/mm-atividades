@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="./assets/css/fonts.css">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
+
 <body>
   <div class="container">
     <div class="control-buttons" style="display: none;">
@@ -19,7 +21,7 @@
   <script src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
   <script>
     const db = new IndexedDBRepository("db", 2);
-    const colors = { green: "#6FCF97", blue: "#6FA3EF"};
+    const colors = { green: "#6FCF97", blue: "#6FA3EF" };
 
     const data = {
       pt: [
@@ -118,8 +120,13 @@
       ]
     };
 
+    function shuffleArray(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
     const selectedLanguage = window.localStorage.getItem("language") ?? "pt";
     const selectedLanguageData = data[selectedLanguage];
+    shuffleArray(selectedLanguageData);
 
     const controlButtons = document.querySelector(".control-buttons");
     controlButtons.style.display = "none";
@@ -150,7 +157,7 @@
       }
 
       await db.init(["activity"]);
-      const userAlreadyMade = await db.search("activity", {user_id: currentUser.id, activity_type: "stroop", language: selectedLanguage});
+      const userAlreadyMade = await db.search("activity", { user_id: currentUser.id, activity_type: "stroop", language: selectedLanguage });
       if (userAlreadyMade.length > 0) {
         alert("Este usuário já realizou esta atividade");
         window.location.href = "./index.html";
@@ -174,7 +181,8 @@
       testContainer.style.top = "50%";
       testContainer.style.left = "50%";
       testContainer.style.transform = "translate(-50%, -50%)";
-      testContainer.style.fontSize = "60px";
+      testContainer.style.fontSize = "70px";
+      testContainer.style.textTransform = "uppercase";
       testContainer.style.fontWeight = "bold";
       testContainer.style.textAlign = "center";
 
@@ -184,17 +192,23 @@
       let index = 0;
       let results = [];
 
-      function showTimer() {
+      function showTimer(count) {
         return new Promise((resolve) => {
-          let count = 5;
-          testContainer.innerText = count;
+          const countContainer = document.createElement("div");
+          countContainer.style.fontSize = "120px";
+          countContainer.style.fontWeight = "bold";
+          countContainer.style.textAlign = "center";
+          countContainer.innerText = count;
+          testContainer.appendChild(countContainer);
+
           const interval = setInterval(() => {
             count--;
             if (count === 0) {
+              testContainer.removeChild(countContainer);
               clearInterval(interval);
               resolve();
             } else {
-              testContainer.innerText = count;
+              countContainer.innerText = count;
             }
           }, 1000);
         });
@@ -206,8 +220,9 @@
         }
 
         if (index >= words.length) {
-          const params =  {
+          const params = {
             user_id: currentUser.id,
+            user_code: currentUser.user_id,
             username: currentUser.username,
             email: currentUser.email,
             activity_type: "stroop",
@@ -230,7 +245,7 @@
           if (event.key === "c" || event.key === "m") {
             let responseTime = (Date.now() - startTime) / 1000;
             let correct = (event.key === "c" && wordData.answer === "green") ||
-                          (event.key === "m" && wordData.answer === "blue");
+              (event.key === "m" && wordData.answer === "blue");
 
             results.push({
               word: wordData.word,
@@ -255,8 +270,8 @@
           let button = event.target.closest("a")?.dataset?.value;
           if (button) {
             let responseTime = (Date.now() - startTime) / 1000;
-            let correct = (button === "C" && wordData.answer === "green") || 
-                          (button === "M" && wordData.answer === "blue");
+            let correct = (button === "C" && wordData.answer === "green") ||
+              (button === "M" && wordData.answer === "blue");
             results.push({
               word: wordData.word,
               color: wordData.color,
@@ -282,11 +297,11 @@
       function showResults() {
         controlButtons.style.display = "none";
         testContainer.innerHTML = `
-          <h2 style="font-size: 40px; margin-bottom: 10px; color: #414141;">FIM</h2>
-          <p style="font-size: 18px;"><strong>Nome:</strong> ${currentUser.username}</p>
-          <p style="font-size: 18px;"><strong>Email:</strong> ${currentUser.email}</p>
+          <h2 style="font-size: 60px; margin-bottom: 10px; color: #414141;">FIM</h2>
+          <p style="font-size: 18px;"><strong>NOME:</strong> ${currentUser.username}</p>
+          <p style="font-size: 18px;"><strong>EMAIL:</strong> ${currentUser.email}</p>
         `;
-      
+
         const restartButton = document.createElement("button");
         restartButton.innerText = "Tela Inicial";
         restartButton.style.display = "block";
@@ -301,15 +316,16 @@
         restartButton.onclick = () => {
           window.location.href = "./index.html";
         };
-      
+
         testContainer.appendChild(restartButton);
       }
 
-      await showTimer();
+      await showTimer(5);
       await showNextWord();
     }
 
     start();
   </script>
 </body>
+
 </html>

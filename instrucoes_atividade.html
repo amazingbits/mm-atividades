@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maria Moog - Instruções</title>
+  <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/css/fonts.css">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+
+<body>
+
+  <!-- área administrativa btn -->
+  <div class="top-left-btn">
+    <a href="./escolher_atividade.html"><i class="fa fa-arrow-left"></i> Voltar</a>
+  </div>
+  <!-- /área administrativa btn -->
+
+  <div class="container">
+
+    <div class="instructions-wrapper"></div>
+
+  </div>
+
+  <script src="./assets/js/font-awesome.js?ts=" + new Date().getTime()></script>
+  <script src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
+  <script>
+    const data = {
+      stroop: {
+        pt: [
+          "<h1>Prezado(a) usuário</h1>",
+          "<hr>",
+          "<p>Para realizar a tarefa <b>Stroop</b>, fique atendo às seguintes instruções:</p>",
+          "<p class='i-box'>Após um timer de <b>5 segundos</b>, uma palavra aleatória aparecerá em tela. Esta palavra poderá vir em duas cores: <span style='color: #6FCF97;'>Verde</span> ou <span style='color: #6FA3EF;'>Azul</span>.</p>",
+          "<p class='i-box'>Se a palavra for <span style='color: #6FCF97;'>Verde</span>, você deverá apertar a <b>Tecla C</b> do teclado.</p>",
+          "<p class='i-box'>Se a palavra for <span style='color: #6FA3EF;'>Azul</span>, você deverá apertar a <b>Tecla M</b> do teclado.</p>",
+          "<p class='i-box'>Assim que você apertar uma das teclas mencionadas, após o intervalo de <b>um segundo</b>, a próxima palavra aparecerá em tela, e assim por diante.</p>",
+          "<p class='i-box'>Após <b>a última palavra aparecer em tela</b>, haverá uma mensagem indicando que a atividade chegou ao fim.</p>",
+          "<p>Quando estiver pronto para começar, clique no botão abaixo.</p>",
+          "<a href='atividade_1.html'>Iniciar atividade</a>",
+        ],
+        en: [
+          "<h1>Dear User</h1>",
+          "<hr>",
+          "<p>To perform the <b>Stroop</b> task, pay attention to the following instructions:</p>",
+          "<p class='i-box'>After a <b>5-second</b> timer, a random word will appear on the screen. This word may appear in two colors: <span style='color: #6FCF97;'>Green</span> or <span style='color: #6FA3EF;'>Blue</span>.</p>",
+          "<p class='i-box'>If the word is <span style='color: #6FCF97;'>Green</span>, you must press the <b>C Key</b> on the keyboard.</p>",
+          "<p class='i-box'>If the word is <span style='color: #6FA3EF;'>Blue</span>, you must press the <b>M Key</b> on the keyboard.</p>",
+          "<p class='i-box'>As soon as you press one of the mentioned keys, after an interval of <b>one second</b>, the next word will appear on the screen, and so on.</p>",
+          "<p class='i-box'>After <b>the last word appears on the screen</b>, a message will indicate that the activity has ended.</p>",
+          "<p>When you are ready to start, click the button below.</p>",
+          "<a href='atividade_1.html'>Start activity</a>",
+        ],
+      },
+      affective_classification: {
+        pt: [
+          "<h1>Prezado(a) usuário</h1>",
+          "<hr>",
+          "<p>Para realizar a tarefa <b>Classificação Afetiva</b>, fique atendo às seguintes instruções:</p>",
+          "<p class='i-box'>Após um timer de <b>5 segundos</b>, uma palavra aleatória aparecerá em tela, seguida por <b>cinco emoções</b>:</p>",
+          "<ul><li><i class='fa fa-chevron-right'></i> Nada emocional/neutra</li> <li><i class='fa fa-chevron-right'></i> Pouco emocional</li> <li><i class='fa fa-chevron-right'></i> Moderadamente emocional</li> <li><i class='fa fa-chevron-right'></i> Muito emocional</li> <li><i class='fa fa-chevron-right'></i> Completamente emocional</li></ul>",
+          "<p class='i-box'>Você deverá escolher a emoção com a qual você mais se identifica perante à palavra em tela.</p>",
+          "<p class='i-box'>Após você ter escolha da emoção apropriada para você, uma próxima palavra aparecerá em tela dentro de um intervalo de <b>um segundo</b>.</p>",
+          "<p class='i-box'>Após <b>a última palavra aparecer em tela</b>, haverá uma mensagem indicando que a atividade chegou ao fim.</p>",
+          "<p>Quando estiver pronto para começar, clique no botão abaixo.</p>",
+          "<a href='atividade_2.html'>Iniciar atividade</a>",
+        ],
+        en: [
+          "<h1>Dear User</h1>",
+          "<hr>",
+          "<p>To perform the <b>Affective Classification</b> task, pay attention to the following instructions:</p>",
+          "<p class='i-box'>After a <b>5-second</b> timer, a random word will appear on the screen, followed by <b>five emotions</b>:</p>",
+          "<ul><li><i class='fa fa-chevron-right'></i> Not emotional/neutral</li> <li><i class='fa fa-chevron-right'></i> Slightly emotional</li> <li><i class='fa fa-chevron-right'></i> Moderately emotional</li> <li><i class='fa fa-chevron-right'></i> Very emotional</li> <li><i class='fa fa-chevron-right'></i> Completely emotional</li></ul>",
+          "<p class='i-box'>You must choose the emotion that best represents how you feel about the word on the screen.</p>",
+          "<p class='i-box'>After selecting the appropriate emotion, the next word will appear on the screen within <b>one second</b>.</p>",
+          "<p class='i-box'>After <b>the last word appears on the screen</b>, a message will indicate that the activity has ended.</p>",
+          "<p>When you are ready to start, click the button below.</p>",
+          "<a href='atividade_2.html'>Start activity</a>",
+        ]
+      }
+    };
+
+    const language = window.localStorage.getItem("language") ?? "pt";
+
+    function getQueryParams() {
+      const params = new URLSearchParams(window.location.search);
+      const obj = {};
+      params.forEach((value, key) => {
+        obj[key] = value;
+      });
+      return obj;
+    }
+
+    function printText() {
+      const queryParams = getQueryParams();
+      if (queryParams.type) {
+        if (data[queryParams.type]) {
+          const selectedLanguage = data[queryParams.type][language];
+          const instructionsWrapper = document.querySelector(".instructions-wrapper");
+          selectedLanguage.forEach(item => {
+            instructionsWrapper.insertAdjacentHTML("beforeend", item);
+          });
+        }
+      }
+    }
+
+    printText();
+  </script>
+</body>
+
+</html>

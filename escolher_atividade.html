@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maria Moog</title>
+  <title>Maria Moog - Escolher atividade</title>
   <link rel="shortcut icon" href="./assets/img/icon.png" type="image/x-icon">
   <link rel="stylesheet" href="./assets/css/fonts.css">
   <link rel="stylesheet" href="./assets/css/styles.css">
@@ -20,7 +20,7 @@
 
   <!-- área administrativa btn -->
   <div class="top-left-btn">
-    <a href="./area_administrativa.html"><i class="fa fa-lock"></i> Área admistrativa</a>
+    <a href="./index.html"><i class="fa fa-arrow-left"></i> Voltar</a>
   </div>
   <!-- /área administrativa btn -->
 
@@ -46,12 +46,12 @@
     </div>
 
     <div class="activity-list">
-      <div class="activity-item" data-link="atividade_1">
+      <div class="activity-item" data-link="instrucoes_atividade.html?type=stroop">
         <img src="./assets/img/stroop_icon.png" alt="Ícone com diversos círculos em cores diferentes">
         <p>Stroop</p>
       </div>
 
-      <div class="activity-item" data-link="atividade_2">
+      <div class="activity-item" data-link="instrucoes_atividade.html?type=affective_classification">
         <img src="./assets/img/affective_classification_icon.png"
           alt="Ícone com uma prancheta e diversos itens numerados em cores diferentes">
         <p>Class. afetiva</p>
@@ -67,7 +67,7 @@
     activityList.forEach((item) => {
       item.addEventListener("click", (event) => {
         const fileName = event.target.closest("div").dataset.link;
-        window.location.href = `${fileName}.html`;
+        window.location.href = `${fileName}`;
       });
     });
   </script>

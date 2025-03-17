@@ -35,6 +35,10 @@
 
     <form action="" id="addUser">
       <div class="input-group">
+        <label for="userId">Número de identificação</label>
+        <input type="text" name="userId" id="userId" required>
+      </div>
+      <div class="input-group">
         <label for="username">Nome</label>
         <input type="text" name="username" id="username" required>
       </div>
@@ -57,9 +61,10 @@
   <script src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
   <script src="./assets/js/scripts.js?ts=" + new Date().getTime()></script>
   <script>
-    function fillUserFields(username, email) {
+    function fillUserFields(username, email, userId) {
       document.querySelector("input[name='username']").value = username;
       document.querySelector("input[name='email']").value = email;
+      document.querySelector("input[name='userId']").value = userId;
     }
 
     window.addEventListener("load", (event) => {
@@ -67,7 +72,7 @@
         const currentUser = window.localStorage.getItem("currentUser") ?? null;
         if (currentUser) {
           const user = JSON.parse(currentUser);
-          fillUserFields(user.username, user.email);
+          fillUserFields(user.username, user.email, user.user_id);
         }
       })();
     });
@@ -80,10 +85,12 @@
         setTimeout(async () => {
           const username = document.querySelector("input[name='username']").value.trim();
           const email = document.querySelector("input[name='email']").value.trim();
+          const userId = document.querySelector("input[name='userId']").value.trim();
 
           const params = {
             username: username.toUpperCase(),
             email: email.toLowerCase(),
+            user_id: userId,
             created_at: getFormattedDate(),
           };
 

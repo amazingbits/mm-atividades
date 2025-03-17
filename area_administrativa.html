@@ -145,16 +145,17 @@
           let users = [];
           allActivities.forEach(async (activity) => {
             const userId = activity.user_id;
+            const userCode = activity.user_code;
             const username = activity.username;
             const activityType = activity.activity_type;
             const language = activity.language;
             const find = users.find(user => user.username === username && user.user_id === userId);
             if (!find) {
-              users.push({ user_id: userId, username: username, activites: [activityType] });
+              users.push({ user_id: userId, user_code: userCode, username: username, activites: [activityType] });
             } else {
               if (!find.activites.includes(activityType)) {
                 const filter = users.filter(item => item.username !== username && item.user_id !== userId);
-                filter.push({ user_id: userId, username: username, activites: ["stroop", "affective_classification"] });
+                filter.push({ user_id: userId, user_code: userCode, username: username, activites: ["stroop", "affective_classification"] });
                 users = filter;
               }
             }
@@ -169,7 +170,7 @@
               const html = `
             <div class="ag-item">
               <div class="agi-header">
-                <span>${user.username}</span>
+                <span>${user.username} (${user.user_code})</span>
               </div>
               <div class="agi-body">
                 <p ${madeStroop}><i class="fa fa-check"></i> Stroop</p>

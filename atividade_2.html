@@ -115,8 +115,13 @@
       ],
     };
 
+    function shuffleArray(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
     const language = window.localStorage.getItem("language") ?? "pt";
     const selectedLanguageData = data[language];
+    shuffleArray(selectedLanguageData);
 
     async function getCurrentUser() {
       const currentUser = window.localStorage.getItem("currentUser");
@@ -153,7 +158,8 @@
       testContainer.style.top = "50%";
       testContainer.style.left = "50%";
       testContainer.style.transform = "translate(-50%, -50%)";
-      testContainer.style.fontSize = "60px";
+      testContainer.style.fontSize = "70px";
+      testContainer.style.textTransform = "uppercase";
       testContainer.style.fontWeight = "bold";
       testContainer.style.textAlign = "center";
       document.body.appendChild(testContainer);
@@ -161,6 +167,11 @@
       const results = [];
       let index = 0;
       let word = selectedLanguageData[index].word;
+      let startTime = Date.now();
+      const eOptions = {
+          pt: ["nada emocional/neutra", "pouco emocional", "moderadamente emocional", "muito emocional", "completamente emocional"],
+          en: ["not emotional/neutral", "slightly emotional", "moderately emotional", "very emotional", "completely emotional"],
+        };
 
       await showTimer(5);
       await showWord(index);
@@ -168,7 +179,7 @@
       function showTimer(count) {
         return new Promise((resolve) => {
           const countContainer = document.createElement("div");
-          countContainer.style.fontSize = "60px";
+          countContainer.style.fontSize = "120px";
           countContainer.style.fontWeight = "bold";
           countContainer.style.textAlign = "center";
           countContainer.innerText = count;
@@ -210,6 +221,7 @@
             const params = {
               user_id: currentUser.id,
               username: currentUser.username,
+              user_code: currentUser.user_id,
               email: currentUser.email,
               language,
               activity_type: "affective_classification",
@@ -227,6 +239,8 @@
         testContainer.innerHTML = "";
 
         await sleep(1);
+
+        startTime = Date.now();
 
         const wordContainer = document.createElement("div");
         wordContainer.classList.add("word-container");
@@ -248,7 +262,7 @@
         emotionContainer.style.alignContent = "center";
         emotionContainer.style.gap = "1rem";
 
-        const emotions = ["nada emocional/neutra", "pouco emocional", "moderadamente emocional", "muito emocional", "completamente emocional"];
+        const emotions = eOptions[language];
         emotions.forEach((emotion, i) => {
           const eContainer = document.createElement("a");
           eContainer.classList.add("emotion");
@@ -262,6 +276,7 @@
           eContainer.style.alignContent = "center";
           eContainer.style.whiteSpace = "nowrap";
           eContainer.innerText = emotion;
+          eContainer.id = i;
           eContainer.addEventListener("click", handleClick);
           emotionContainer.appendChild(eContainer);
         });
@@ -270,15 +285,22 @@
       }
 
       async function handleClick(event) {
+        let responseTime = (Date.now() - startTime) / 1000;
         const currentButton = event.target.closest(".emotion");
-        updateResults(word, currentButton.innerText);
+        let currentEmotion = currentButton.innerText;
+        if (language === "en") {
+          const rLanguage = language === "pt" ? "en" : "pt";
+          const aEmotions = eOptions[rLanguage];
+          currentEmotion = aEmotions[Number(currentButton.id)]
+        }
+        updateResults(word, currentEmotion, responseTime.toFixed(2));
         await wordHighlight(currentButton);
         index = index + 1;
         await showWord(index);
       }
 
-      function updateResults(word, emotion) {
-        results.push({ word, emotion, username: currentUser.username, email: currentUser.email });
+      function updateResults(word, emotion, responseTime) {
+        results.push({ word, emotion, username: currentUser.username, email: currentUser.email, response_time: responseTime });
       }
 
       async function wordHighlight(button) {
