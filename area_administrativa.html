@@ -30,6 +30,7 @@
       <img src="./assets/img/icon.png"
         alt="Imagem do desenho de um cérebro humano com multiplas cores separadas por área do cérebro">
       <p>Área administrativa</p>
+      <a href="#" id="clearPassword">Zerar senha</a>
     </div>
 
     <!-- Usuário não logado -->
@@ -289,6 +290,16 @@
         link.click();
         document.body.removeChild(link);
       }
+
+      document.querySelector("#clearPassword").addEventListener("click", (event) => {
+        event.preventDefault();
+        const opt = confirm("Tem certeza que deseja zerar a senha?");
+        if (opt) {
+          window.localStorage.removeItem("hasPin");
+          window.localStorage.removeItem("pin");
+          window.location.reload();
+        }
+      });
 
     </script>
 </body>

@@ -501,3 +501,9 @@ form a {
   background-color: var(--color-primary);
   color: var(--color-secondary);
 }
+
+#clearPassword {
+  text-decoration: none;
+  font-weight: 700;
+  color: red;
+}
