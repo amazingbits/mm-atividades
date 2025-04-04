@@ -444,6 +444,8 @@ form a {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  max-height: calc(100vh - 400px);
+  overflow: auto;
 }
 
 .instructions-wrapper h1 {
