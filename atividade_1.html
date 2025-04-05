@@ -121,7 +121,11 @@
     };
 
     function shuffleArray(array) {
-      return array.sort(() => Math.random() - 0.5);
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
     }
 
     const selectedLanguage = window.localStorage.getItem("language") ?? "pt";
@@ -214,6 +218,16 @@
         });
       }
 
+      const currentColors = [];
+      function verifyColor(currentColor, times = 3) {
+        const lastColors = currentColors.slice(-times);
+        const allEqual = lastColors.length === times && lastColors.every(c => c === currentColor);
+        if (allEqual) {
+          return currentColor === colors.blue ? colors.green : colors.blue;
+        }
+        return currentColor;
+      }
+
       async function showNextWord() {
         if (isMobileDevice()) {
           controlButtons.style.display = "flex";
@@ -236,8 +250,9 @@
         }
 
         const wordData = words[index];
+        currentColors.push(wordData.color);
         testContainer.innerText = wordData.word;
-        testContainer.style.color = wordData.color;
+        testContainer.style.color = verifyColor(wordData.color);
 
         let startTime = Date.now();
 
