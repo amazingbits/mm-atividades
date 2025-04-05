@@ -444,8 +444,29 @@ form a {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  max-height: calc(100vh - 400px);
+  max-height: calc(100vh - 100px);
   overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.instructions-wrapper::-webkit-scrollbar {
+  width: 8px; /* largura vertical */
+  height: 8px; /* altura horizontal */
+}
+
+.instructions-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.instructions-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.instructions-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .instructions-wrapper h1 {
@@ -461,7 +482,7 @@ form a {
 .instructions-wrapper p,
 .instructions-wrapper ul li {
   text-align: justify;
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--color-primary);
 }
 

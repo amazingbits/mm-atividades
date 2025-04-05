@@ -43,10 +43,6 @@
         <input type="text" name="username" id="username" required>
       </div>
       <div class="input-group">
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email" required>
-      </div>
-      <div class="input-group">
         <label for="language">Língua</label>
         <select name="language" id="language">
           <option value="pt">Português</option>
@@ -61,9 +57,8 @@
   <script src="./assets/js/repository.js?ts=" + new Date().getTime()></script>
   <script src="./assets/js/scripts.js?ts=" + new Date().getTime()></script>
   <script>
-    function fillUserFields(username, email, userId) {
+    function fillUserFields(username, userId) {
       document.querySelector("input[name='username']").value = username;
-      document.querySelector("input[name='email']").value = email;
       document.querySelector("input[name='userId']").value = userId;
     }
 
@@ -72,7 +67,7 @@
         const currentUser = window.localStorage.getItem("currentUser") ?? null;
         if (currentUser) {
           const user = JSON.parse(currentUser);
-          fillUserFields(user.username, user.email, user.user_id);
+          fillUserFields(user.username, user.user_id);
         }
       })();
     });
@@ -84,22 +79,20 @@
         event.preventDefault();
         setTimeout(async () => {
           const username = document.querySelector("input[name='username']").value.trim();
-          const email = document.querySelector("input[name='email']").value.trim();
           const userId = document.querySelector("input[name='userId']").value.trim();
 
           const params = {
             username: username.toUpperCase(),
-            email: email.toLowerCase(),
             user_id: userId,
             created_at: getFormattedDate(),
           };
 
           await db.init(["user"]);
-          const userAlreadyExists = await db.search("user", { email });
+          const userAlreadyExists = await db.search("user", { user_id: userId });
           if (userAlreadyExists.length === 0) {
             await db.add("user", params);
           }
-          const currentUser = await db.search("user", { email });
+          const currentUser = await db.search("user", { user_id: userId });
           window.localStorage.setItem("currentUser", JSON.stringify(currentUser[0]));
           window.location.href = "./escolher_atividade.html";
         }, 1000);

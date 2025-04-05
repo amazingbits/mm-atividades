@@ -120,17 +120,40 @@
       ]
     };
 
-    function shuffleArray(array) {
+    function shuffleArrayWithColorControl(array, times = 3) {
+      // Embaralha os itens normalmente
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
-      return array;
+
+      // Corrige repetições de cor
+      const currentColors = [];
+
+      return array.map(item => {
+        const currentColor = item.color;
+        const lastColors = currentColors.slice(-times);
+        const allEqual = lastColors.length === times && lastColors.every(c => c === currentColor);
+
+        let newColor = currentColor;
+
+        if (allEqual) {
+          newColor = currentColor === colors.blue ? colors.green : colors.blue;
+        }
+
+        currentColors.push(newColor);
+
+        return {
+          ...item,
+          color: newColor,
+          answer: newColor === colors.green ? "green" : "blue"
+        };
+      });
     }
 
     const selectedLanguage = window.localStorage.getItem("language") ?? "pt";
     const selectedLanguageData = data[selectedLanguage];
-    shuffleArray(selectedLanguageData);
+    shuffleArrayWithColorControl(selectedLanguageData);
 
     const controlButtons = document.querySelector(".control-buttons");
     controlButtons.style.display = "none";
@@ -218,16 +241,6 @@
         });
       }
 
-      const currentColors = [];
-      function verifyColor(currentColor, times = 3) {
-        const lastColors = currentColors.slice(-times);
-        const allEqual = lastColors.length === times && lastColors.every(c => c === currentColor);
-        if (allEqual) {
-          return currentColor === colors.blue ? colors.green : colors.blue;
-        }
-        return currentColor;
-      }
-
       async function showNextWord() {
         if (isMobileDevice()) {
           controlButtons.style.display = "flex";
@@ -238,7 +251,6 @@
             user_id: currentUser.id,
             user_code: currentUser.user_id,
             username: currentUser.username,
-            email: currentUser.email,
             activity_type: "stroop",
             language: selectedLanguage,
             results,
@@ -250,9 +262,8 @@
         }
 
         const wordData = words[index];
-        currentColors.push(wordData.color);
         testContainer.innerText = wordData.word;
-        testContainer.style.color = verifyColor(wordData.color);
+        testContainer.style.color = wordData.color;
 
         let startTime = Date.now();
 
@@ -314,7 +325,7 @@
         testContainer.innerHTML = `
           <h2 style="font-size: 60px; margin-bottom: 10px; color: #414141;">FIM</h2>
           <p style="font-size: 18px;"><strong>NOME:</strong> ${currentUser.username}</p>
-          <p style="font-size: 18px;"><strong>EMAIL:</strong> ${currentUser.email}</p>
+          <p style="font-size: 18px;"><strong>CÓDIGO:</strong> ${currentUser.user_id}</p>
         `;
 
         const restartButton = document.createElement("button");

@@ -155,7 +155,7 @@
       }
 
       await db.init(["activity"]);
-      const userAlreadyMadeActivity = await db.search("activity", { email: currentUser.email, activity_type: "affective_classification", language });
+      const userAlreadyMadeActivity = await db.search("activity", { user_code: currentUser.user_id, activity_type: "affective_classification", language });
       if (userAlreadyMadeActivity.length > 0) {
         alert("Usuário já fez esta atividade");
         window.location.href = "./index.html";
@@ -232,7 +232,6 @@
               user_id: currentUser.id,
               username: currentUser.username,
               user_code: currentUser.user_id,
-              email: currentUser.email,
               language,
               activity_type: "affective_classification",
               results,
@@ -310,7 +309,7 @@
       }
 
       function updateResults(word, emotion, responseTime) {
-        results.push({ word, emotion, username: currentUser.username, email: currentUser.email, response_time: responseTime });
+        results.push({ word, emotion, username: currentUser.username, response_time: responseTime });
       }
 
       async function wordHighlight(button) {
@@ -329,7 +328,7 @@
         testContainer.innerHTML = `
           <h2 style="font-size: 40px; margin-bottom: 10px; color: #414141;">FIM</h2>
           <p style="font-size: 18px;"><strong>Nome:</strong> ${currentUser.username}</p>
-          <p style="font-size: 18px;"><strong>Email:</strong> ${currentUser.email}</p>
+          <p style="font-size: 18px;"><strong>ID:</strong> ${currentUser.user_id}</p>
         `;
       
         const restartButton = document.createElement("button");
