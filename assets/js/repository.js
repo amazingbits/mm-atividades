@@ -95,9 +95,10 @@ class IndexedDBRepository {
         const cursor = event.target.result;
         if (cursor) {
           const match = Object.keys(criteria).every((key) => {
+            /*
             if (typeof cursor.value[key] === "string") {
               return cursor.value[key].includes(criteria[key]);
-            }
+            }*/
             return cursor.value[key] === criteria[key];
           });
 
